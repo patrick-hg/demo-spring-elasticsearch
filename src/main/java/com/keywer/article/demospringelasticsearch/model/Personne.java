@@ -1,4 +1,4 @@
-package com.keywer.article.demospringelasticsearch;
+package com.keywer.article.demospringelasticsearch.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;

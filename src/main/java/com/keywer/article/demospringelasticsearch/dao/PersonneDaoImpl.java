@@ -1,5 +1,6 @@
-package com.keywer.article.demospringelasticsearch;
+package com.keywer.article.demospringelasticsearch.dao;
 
+import com.keywer.article.demospringelasticsearch.model.Personne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;

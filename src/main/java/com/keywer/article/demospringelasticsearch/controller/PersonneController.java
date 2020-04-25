@@ -1,5 +1,9 @@
-package com.keywer.article.demospringelasticsearch;
+package com.keywer.article.demospringelasticsearch.controller;
 
+import com.keywer.article.demospringelasticsearch.dao.PersonneDao;
+import com.keywer.article.demospringelasticsearch.dao.PersonneRepository;
+import com.keywer.article.demospringelasticsearch.model.Personne;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,11 +29,11 @@ public class PersonneController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public Personne addPersonne(@RequestBody Personne personne) {
-        personne.setCreationDate(new Date());
+    public Personne persist(@RequestBody Personne personne) {
+        if (Strings.isEmpty(personne.getId())) {
+            personne.setCreationDate(new Date());
+        }
         return personneRepository.save(personne);
     }
-
-
 
 }
