@@ -5,15 +5,21 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Date;
 
-@Document(indexName = "index_demo", type = "personne")
-public class Personne {
-
+@Document(indexName = "users", type = "user")
+public class User {
     @Id
     private String id;
-    private String nom;
+    private String username;
+    private String name;
     private Date creationDate;
 
-    protected Personne() {
+    protected User() {
+    }
+
+    public User(String username, String name) {
+        this.username = username;
+        this.name = name;
+        this.creationDate = new Date();
     }
 
     public String getId() {
@@ -24,12 +30,20 @@ public class Personne {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getCreationDate() {

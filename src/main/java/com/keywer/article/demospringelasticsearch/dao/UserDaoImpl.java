@@ -1,6 +1,6 @@
 package com.keywer.article.demospringelasticsearch.dao;
 
-import com.keywer.article.demospringelasticsearch.model.Personne;
+import com.keywer.article.demospringelasticsearch.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
@@ -8,27 +8,26 @@ import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PersonneDaoImpl implements PersonneDao {
+public class UserDaoImpl implements UserDao {
 
-    @Value("${elasticsearch.index.name}")
+    @Value("${elasticsearch.index.users.name}")
     private String indexName;
 
-    @Value("${elasticsearch.personne.type}")
-    private String personneTypeName;
+    @Value("${elasticsearch.user.type}")
+    private String userTypeName;
 
     @Autowired
     private ElasticsearchTemplate esTemplate;
 
     @Override
-    public Personne persistPersonne(Personne personne) {
+    public User persistUser(User user) {
 
         IndexQuery userQuery = new IndexQuery();
         userQuery.setIndexName(indexName);
-        userQuery.setType(personneTypeName);
-        userQuery.setObject(personne);
+        userQuery.setType(userTypeName);
+        userQuery.setObject(user);
 
         esTemplate.refresh(indexName);
-
-        return personne;
+        return user;
     }
 }
