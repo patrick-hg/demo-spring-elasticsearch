@@ -21,11 +21,11 @@ public class Tweet {
     protected Tweet() {
     }
 
-    public Tweet(String content, String localization, String userName) {
-        this.content = content;
+    public Tweet(String localization, String userName, String content, Date creationDate) {
         this.localization = localization;
         this.userName = userName;
-        this.creationDate = new Date();
+        this.content = content;
+        this.creationDate = creationDate;
         this.available = true;
     }
 

@@ -16,10 +16,10 @@ public class User {
     protected User() {
     }
 
-    public User(String username, String name) {
+    public User(String username, String name, Date creationDate) {
         this.username = username;
         this.name = name;
-        this.creationDate = new Date();
+        this.creationDate = creationDate;
     }
 
     public String getId() {
