@@ -37,12 +37,12 @@ public class UserService {
     }
 
     public void persistAll(Collection<User> users) {
-        Date now = new Date();
-        users.forEach(user -> {
-            if (Strings.isEmpty(user.getId())) {
-                user.setCreationDate(now);
-            }
-        });
+//        Date now = new Date();
+//        users.forEach(user -> {
+//            if (Strings.isEmpty(user.getId())) {
+//                user.setCreationDate(now);
+//            }
+//        });
 
         userRepository.saveAll(users);
     }
