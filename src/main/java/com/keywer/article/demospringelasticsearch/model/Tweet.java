@@ -12,10 +12,14 @@ public class Tweet {
 
     @Id
     private String id;
+
+//    @Field(type = FieldType.Text)
     private String content;
     private List<String> tags;
     private String localization;
     private Boolean available;
+
+//    @Field(type = FieldType.Date)
     private Date creationDate;
     private String username;
 

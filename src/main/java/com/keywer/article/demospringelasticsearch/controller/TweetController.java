@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/tweet")
@@ -42,8 +40,8 @@ public class TweetController {
 
     @GetMapping(value = "/find-by-username")
     public List<Tweet> findByUsernameWithPagination(@RequestParam String username,
-                                                    @RequestParam Integer pageNum,
-                                                    @RequestParam Integer pageSize,
+                                                    @RequestParam(required = false) Integer pageNum,
+                                                    @RequestParam(required = false) Integer pageSize,
                                                     @RequestParam Boolean useCustomQuery) {
         if (useCustomQuery) {
             return tweetService.findByUsernameUsingCustomQuery(username, pageNum, pageSize);
@@ -52,9 +50,9 @@ public class TweetController {
     }
 
     @GetMapping(value = "/search")
-    public List<Tweet> findByUsernameWithPagination(@RequestParam String text,
-                                                    @RequestParam Integer pageNum,
-                                                    @RequestParam Integer pageSize) {
-        return null;
+    public List<Tweet> search(@RequestParam String text,
+                              @RequestParam(required = false) Integer pageNum,
+                              @RequestParam(required = false) Integer pageSize) {
+        return tweetService.search(text, pageNum, pageSize);
     }
 }
