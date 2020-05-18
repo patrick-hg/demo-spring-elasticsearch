@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class Utils {
 
@@ -25,5 +26,11 @@ public class Utils {
         return new Date(now - aDay * randomNum(days));
     }
 
-    private final static List<String> localizationSamples = Arrays.asList("Paris, France", "Lyon, France", "Marseille, France", "Rome, Italie", "Berlin, Allemagne", "Londres, Angletaire");
+    public static List tagsFromText(String text) {
+        String[] tags = text.split(" ");
+        return Arrays.stream(tags)
+                .filter(s -> s.startsWith("#"))
+                .map(s -> s.substring(1))
+                .collect(Collectors.toList());
+    }
 }

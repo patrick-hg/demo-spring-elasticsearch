@@ -2,6 +2,8 @@ package com.keywer.article.demospringelasticsearch.controller;
 
 import com.keywer.article.demospringelasticsearch.dao.TweetRepository;
 import com.keywer.article.demospringelasticsearch.model.Tweet;
+import com.keywer.article.demospringelasticsearch.service.TweetService;
+import com.keywer.article.demospringelasticsearch.utils.Utils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ public class TweetController {
     @Autowired
     private TweetRepository tweetRepository;
 
+    @Autowired
+    private TweetService tweetService;
+
     @GetMapping
     public List<Tweet> getAll() {
         List<Tweet> tweets = new ArrayList<>();
@@ -31,16 +36,25 @@ public class TweetController {
         if (Strings.isEmpty(tweet.getId())) {
             tweet.setCreationDate(new Date());
         }
-        tweet.setTags(getTags(tweet.getContent()));
+        tweet.setTags(Utils.tagsFromText(tweet.getContent()));
         return tweetRepository.save(tweet);
     }
 
-    private List getTags(String text) {
-        String[] tags = text.split(" ");
-        return Arrays.stream(tags)
-                .filter(s -> s.startsWith("#"))
-                .map(s -> s.substring(1))
-                .collect(Collectors.toList());
+    @GetMapping(value = "/find-by-username")
+    public List<Tweet> findByUsernameWithPagination(@RequestParam String username,
+                                                    @RequestParam Integer pageNum,
+                                                    @RequestParam Integer pageSize,
+                                                    @RequestParam Boolean useCustomQuery) {
+        if (useCustomQuery) {
+            return tweetService.findByUsernameUsingCustomQuery(username, pageNum, pageSize);
+        }
+        return tweetService.findByUsername(username, pageNum, pageSize);
     }
 
+    @GetMapping(value = "/search")
+    public List<Tweet> findByUsernameWithPagination(@RequestParam String text,
+                                                    @RequestParam Integer pageNum,
+                                                    @RequestParam Integer pageSize) {
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package com.keywer.article.demospringelasticsearch.model;
 
+import com.keywer.article.demospringelasticsearch.utils.Utils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -16,17 +17,18 @@ public class Tweet {
     private String localization;
     private Boolean available;
     private Date creationDate;
-    private String userName;
+    private String username;
 
     protected Tweet() {
     }
 
-    public Tweet(String localization, String userName, String content, Date creationDate) {
+    public Tweet(String localization, String username, String content, Date creationDate) {
         this.localization = localization;
-        this.userName = userName;
+        this.username = username;
         this.content = content;
         this.creationDate = creationDate;
         this.available = true;
+        this.tags = Utils.tagsFromText(content);
     }
 
     public String getId() {
@@ -77,11 +79,11 @@ public class Tweet {
         this.available = available;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

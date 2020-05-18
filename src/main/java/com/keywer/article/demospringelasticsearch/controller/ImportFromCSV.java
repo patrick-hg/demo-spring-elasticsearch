@@ -32,7 +32,7 @@ public class ImportFromCSV {
             List<User> users = new ArrayList<>();
 
             while ((line = reader.readNext()) != null) {
-                users.add(new User(line[0], line[1], Utils.oneYearAgo()));
+                users.add(new User(line[0].trim(), line[1].trim(), Utils.oneYearAgo()));
             }
             userRepository.saveAll(users);
 
@@ -50,7 +50,7 @@ public class ImportFromCSV {
             List<Tweet> tweets = new ArrayList<>();
 
             while ((line = reader.readNext()) != null) {
-                tweets.add(new Tweet(line[0], line[1], line[2], Utils.randomDateInRange(365)));
+                tweets.add(new Tweet(line[0].trim(), line[1].trim(), line[2].trim(), Utils.randomDateInRange(365)));
             }
             tweetRepository.saveAll(tweets);
 
