@@ -1,6 +1,5 @@
 package com.keywer.article.demospringelasticsearch.service;
 
-import com.keywer.article.demospringelasticsearch.dao.UserDao;
 import com.keywer.article.demospringelasticsearch.dao.UserRepository;
 import com.keywer.article.demospringelasticsearch.model.User;
 import org.apache.logging.log4j.util.Strings;
@@ -17,9 +16,6 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;  // adapté aux operations CRUD
-
-    @Autowired
-    private UserDao userDao;                // adapté aux operations plus avancés
 
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
