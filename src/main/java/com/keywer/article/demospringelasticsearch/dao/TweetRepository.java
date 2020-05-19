@@ -37,10 +37,14 @@ public interface TweetRepository extends ElasticsearchRepository<Tweet, String> 
                     }
                 },
                 {
-                    "match": {"username": "?0"}
+                    "match": {
+                        "username": "?0"
+                    }
                 },
                 {
-                    "match": {"localization": "?0"}
+                    "match": {
+                        "localization": "?0"
+                    }
                 }
             ]
         }

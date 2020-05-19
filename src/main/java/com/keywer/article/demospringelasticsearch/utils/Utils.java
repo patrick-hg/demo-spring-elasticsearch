@@ -1,5 +1,8 @@
 package com.keywer.article.demospringelasticsearch.utils;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -32,5 +35,12 @@ public class Utils {
                 .filter(s -> s.startsWith("#"))
                 .map(s -> s.substring(1))
                 .collect(Collectors.toList());
+    }
+
+    public static Pageable pageableOf(Integer pageNum, Integer pageSize) {
+        if (pageNum == null || pageSize == null) {
+            return Pageable.unpaged();
+        }
+        return PageRequest.of(pageNum, pageSize);
     }
 }

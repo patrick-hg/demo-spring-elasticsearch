@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;  // adapté aux operations CRUD
+    private UserRepository userRepository;
 
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
@@ -28,9 +27,5 @@ public class UserService {
             user.setCreationDate(new Date());
         }
         return userRepository.save(user);
-    }
-
-    public void persistAll(Collection<User> users) {
-        userRepository.saveAll(users);
     }
 }
