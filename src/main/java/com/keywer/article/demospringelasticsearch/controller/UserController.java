@@ -10,7 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
     @Autowired
     private UserService userService;
 
@@ -23,5 +22,4 @@ public class UserController {
     public User persist(@RequestBody User user) {
         return userService.persistUser(user);
     }
-
 }

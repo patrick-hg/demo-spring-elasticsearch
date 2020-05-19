@@ -23,8 +23,13 @@ public class ImportFromCSV {
     @Autowired
     private TweetRepository tweetRepository;
 
-    @GetMapping("/import-users")
-    public void importUsers() {
+    @GetMapping("/import-data")
+    public void importData() {
+        importUsers();
+        importTweets();
+    }
+
+    private void importUsers() {
         try {
             CSVReader reader = new CSVReader(new FileReader("src/main/resources/users.csv"), ';');
             String[] line;
@@ -41,8 +46,7 @@ public class ImportFromCSV {
         }
     }
 
-    @GetMapping("/import-tweets")
-    public void importTweets() {
+    private void importTweets() {
         try {
             CSVReader reader = new CSVReader(new FileReader("src/main/resources/tweets.csv"), ';');
             String[] line;

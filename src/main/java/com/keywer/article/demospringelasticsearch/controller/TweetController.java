@@ -24,9 +24,7 @@ public class TweetController {
 
     @GetMapping
     public List<Tweet> getAll() {
-        List<Tweet> tweets = new ArrayList<>();
-        tweetRepository.findAll().forEach(tweets::add);
-        return tweets;
+        return tweetService.getAll();
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
