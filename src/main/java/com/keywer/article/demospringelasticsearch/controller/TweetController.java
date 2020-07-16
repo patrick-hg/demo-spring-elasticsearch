@@ -8,7 +8,6 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,8 +37,8 @@ public class TweetController {
 
     @GetMapping(value = "/find-by-username")
     public List<Tweet> findByUsernameWithPagination(@RequestParam String username,
-                                                    @RequestParam(required = false) Integer pageNum,
-                                                    @RequestParam(required = false) Integer pageSize,
+                                                    @RequestParam(required = false, defaultValue = "0") Integer pageNum,
+                                                    @RequestParam(required = false, defaultValue = "5") Integer pageSize,
                                                     @RequestParam Boolean useCustomQuery) {
         if (useCustomQuery) {
             return tweetService.findByUsernameUsingCustomQuery(username, pageNum, pageSize);
@@ -49,8 +48,8 @@ public class TweetController {
 
     @GetMapping(value = "/search")
     public List<Tweet> search(@RequestParam String text,
-                              @RequestParam(required = false) Integer pageNum,
-                              @RequestParam(required = false) Integer pageSize) {
+                              @RequestParam(required = false, defaultValue = "0") Integer pageNum,
+                              @RequestParam(required = false, defaultValue = "5") Integer pageSize) {
         return tweetService.search(text, pageNum, pageSize);
     }
 }
