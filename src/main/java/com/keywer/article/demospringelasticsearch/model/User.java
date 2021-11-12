@@ -11,15 +11,17 @@ public class User {
     private String id;
     private String username;
     private String name;
-    private Date creationDate;
+    private String nationality;
+    private Date memberSince;
 
     protected User() {
     }
 
-    public User(String username, String name, Date creationDate) {
+    public User(String username, String name, String nationality, Date memberSince) {
         this.username = username;
         this.name = name;
-        this.creationDate = creationDate;
+        this.nationality = nationality;
+        this.memberSince = memberSince;
     }
 
     public String getId() {
@@ -46,11 +48,19 @@ public class User {
         this.name = name;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public String getNationality() {
+        return nationality;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public Date getMemberSince() {
+        return memberSince;
+    }
+
+    public void setMemberSince(Date memberSince) {
+        this.memberSince = memberSince;
     }
 }

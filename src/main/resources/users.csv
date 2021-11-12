@@ -1,13 +1,11 @@
-username;name
-jean.dupond;Jean DUPOND
-john.doe;John DOE
-rick.martin;Rick MARTIN
-paul.smith;Paul SMITH
-aadesh.patel;Aadesh PATEL
-javacodegeeks;Java Code Geek
-reuters; Reuters
-afp;AFP
-rhdevelopers;Redhat Developers
-gadgethax;GadgetHAX
-lefigaro;Le Figaro
-xdadevelopers; XDA Developers
+username;name;nationality;memberSince
+jean.dupond;Jean DUPOND;FRENCH;2019-05-12
+john.doe;John DOE;ENGLISH;2019-07-12
+rick.martin;Rick MARTIN;ENGLISH;2020-04-12
+paul.martin;Paul MARTIN;FRENCH;2020-10-12
+aadesh.patel;Aadesh PATEL;INDIAN;2020-10-17
+marc.martin;Marc MARTIN;ENGLISH;2021-01-07
+marc.henry;Marc HENRY;FRENCH;2021-03-12
+fred.henry;Fred HENRY;FRENCH;2021-05-13
+jules.julien;Jules JULIEN;FRENCH;2021-07-21
+aarush.laghari;Aarush LAGHARI;INDIAN;2021-08-15
