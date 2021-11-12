@@ -7,8 +7,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.util.Date;
 import java.util.List;
 
-@Document(indexName = "tweets", type = "tweet")
-public class Tweet {
+@Document(indexName = "posts", type = "posts")
+public class Message {
 
     @Id
     private String id;
@@ -23,10 +23,10 @@ public class Tweet {
     private Date creationDate;
     private String username;
 
-    protected Tweet() {
+    protected Message() {
     }
 
-    public Tweet(String localization, String username, String content, Date creationDate) {
+    public Message(String localization, String username, String content, Date creationDate) {
         this.localization = localization;
         this.username = username;
         this.content = content;

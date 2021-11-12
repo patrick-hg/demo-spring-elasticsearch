@@ -23,9 +23,6 @@ public class UserService {
     }
 
     public User persistUser(User user) {
-        if (Strings.isEmpty(user.getId())) {
-            user.setCreationDate(new Date());
-        }
         return userRepository.save(user);
     }
 }
