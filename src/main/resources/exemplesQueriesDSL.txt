@@ -1,0 +1,77 @@
+
+# rechercher un utilisateur par son username
+curl -X GET "localhost:9200/users/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "term": {
+      "username": "kim.lan"
+    }
+  }
+}
+'
+
+# rechercher les utilisateurs de moins de 25 ans
+curl -X GET "localhost:9200/users/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "range": {
+      "age": {
+        "lt": "25"
+      }
+    }
+  }
+}
+'
+
+# rechercher les utilisateurs recents
+curl -X GET "localhost:9200/users/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "range": {
+      "memberSince": {
+        "lt": "2020-01-01",
+        "gte": "2018-01-01",
+        "format": "yyyy-MM-dd"
+      }
+    }
+  }
+}
+'
+
+# les messages
+curl -X GET "localhost:9200/messages/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "range": {
+      "creationDate": {
+        "lte": "2018-01-01",
+        "format": "yyyy-MM-dd"
+      }
+    }
+  }
+}
+'
+
+# rechercher les messages d'un utilisateur
+curl -X GET "localhost:9200/messages/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "term": {
+      "username": "kim.lan"
+    }
+  }
+}
+'
+
+curl -XGET localhost:9200/messages/message/_search
+{
+  "query": {
+    "range": {
+      "creationDate": {
+        "gte": 2020-01-01,
+        "lte": 2022-01-01,
+        "boost": 2.0
+      }
+    }
+  }
+}

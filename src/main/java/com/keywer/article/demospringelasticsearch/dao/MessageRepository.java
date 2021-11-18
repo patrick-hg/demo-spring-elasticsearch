@@ -14,18 +14,12 @@ public interface MessageRepository extends ElasticsearchRepository<Message, Stri
 
     /*
     "query": {
-        "bool": {
-            "must": [
-                {
-                    "match": {
-                        "username": "?0"
-                    }
-                }
-            ]
+        "term": {
+            "username": "?0"
         }
-    }  */
-    @Query("{\"bool\": {\"must\": [{\"match\": {\"username\": \"?0\"}}]}}")
-    Page<Message> findByUsernameUsingCustomQuery(String name, Pageable pageable); // elasticsearch boolean query
+    }   */
+    @Query("{\"term\": {\"username\": \"?0\"}}")
+    Page<Message> findByUsernameUsingCustomQuery(String name, Pageable pageable); // elasticsearch term query
 
     /*
     "query": {
@@ -45,10 +39,51 @@ public interface MessageRepository extends ElasticsearchRepository<Message, Stri
                     "match": {
                         "localization": "?0"
                     }
+                },
+                {
+                    "match": {
+                        "language": "?0"
+                    }
                 }
             ]
         }
     }  */
-    @Query("{\"bool\": {\"should\": [{\"match\": {\"content\": \"?0\"}}, {\"match\": {\"username\": \"?0\"}}, {\"match\": {\"localization\": \"?0\"}}]}}")
+    @Query("{\"bool\": {\"should\": [{\"match\": {\"content\": \"?0\"}}, {\"match\": {\"username\": \"?0\"}}, {\"match\": {\"localization\": \"?0\"}}, {\"match\": {\"language\": \"?0\"}}]}}")
     Page<Message> search(String text, Pageable pageable);
+
+    /*
+    "query": {
+        "bool": {
+            "should": [
+                {
+                    "match": {
+                        "content": "?0"
+                    }
+                },
+                {
+                    "match": {
+                        "username": "?0"
+                    }
+                },
+                {
+                    "match": {
+                        "localization": "?0"
+                    }
+                },
+                {
+                    "match": {
+                        "language": "?0"
+                    }
+                }
+            ],
+            "must": {
+                "range": {
+                    "creationDate": { "gte": "2020-01-01", "lte": "2022-01-01"}
+                }
+            }
+        }
+    }  */
+//    @Query("{\"bool\": {\"must\": [{\"match\": {\"content\": \"?0\"}}, {\"match\": {\"username\": \"?0\"}}, {\"match\": {\"localization\": \"?0\"}}, {\"match\": {\"language\": \"?0\"}}, {\"range\": {\"creationDate\": {\"gte\": \"2015-01-01\", \"lt\": \"2022-01-01\", \"format\": \"yyyy-MM-dd\"}}}]}}")
+    @Query("{\"range\": {\"creationDate\": {\"gte\": \"20190101\", \"lt\": \"20200101\", \"format\": \"yyyy-MM-dd\"}}}")
+    Page<Message> searchWithDateRange(String text, String from, String until, Pageable pageable);
 }

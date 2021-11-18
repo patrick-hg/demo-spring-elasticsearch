@@ -2,13 +2,14 @@ package com.keywer.article.demospringelasticsearch.controller;
 
 import com.keywer.article.demospringelasticsearch.dao.MessageRepository;
 import com.keywer.article.demospringelasticsearch.model.Message;
+import com.keywer.article.demospringelasticsearch.model.SearchResult;
 import com.keywer.article.demospringelasticsearch.service.MessageService;
 import com.keywer.article.demospringelasticsearch.utils.Utils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -27,12 +28,12 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public Message persist(@RequestBody Message publication) {
-        if (Strings.isEmpty(publication.getId())) {
-            publication.setCreationDate(new Date());
+    public Message persist(@RequestBody Message message) {
+        if (Strings.isEmpty(message.getId())) {
+            message.setCreationDate(LocalDate.now().toString());
         }
-        publication.setTags(Utils.tagsFromText(publication.getContent()));
-        return messageRepository.save(publication);
+        message.setTags(Utils.tagsFromText(message.getContent()));
+        return messageRepository.save(message);
     }
 
     @GetMapping(value = "/find-by-username")
@@ -47,9 +48,11 @@ public class MessageController {
     }
 
     @GetMapping(value = "/search")
-    public List<Message> search(@RequestParam String text,
-                                @RequestParam(required = false) Integer pageNum,
-                                @RequestParam(required = false) Integer pageSize) {
-        return messageService.search(text, pageNum, pageSize);
+    public SearchResult search(@RequestParam String text,
+                               @RequestParam(required = false) Integer pageNum,
+                               @RequestParam(required = false) Integer pageSize,
+                               @RequestParam(required = false) String from,
+                               @RequestParam(required = false) String until) {
+        return messageService.search(text, from, until, pageNum, pageSize);
     }
 }
