@@ -2,7 +2,6 @@ package com.keywer.article.demospringelasticsearch.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
-
 import java.util.Date;
 
 @Document(indexName = "users", type = "user")
@@ -11,19 +10,22 @@ public class User {
     private String id;
     private String username;
     private String name;
+    private int age;
     private String nationality;
     private Date memberSince;
 
     protected User() {
     }
 
-    public User(String username, String name, String nationality, Date memberSince) {
+    public User(String username, String name, int age, String nationality, Date memberSince) {
         this.username = username;
         this.name = name;
+        this.age = age;
         this.nationality = nationality;
         this.memberSince = memberSince;
     }
 
+    // Getters & setters ...
     public String getId() {
         return id;
     }
@@ -46,6 +48,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getNationality() {

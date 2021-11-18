@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public User persist(@RequestBody User user) {
-        return userService.persistUser(user);
+    public void persist(@RequestBody User user) {
+        userService.persistUser(user);
     }
 }

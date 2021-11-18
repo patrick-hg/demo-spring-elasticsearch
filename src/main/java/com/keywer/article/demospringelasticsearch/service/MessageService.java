@@ -2,10 +2,14 @@ package com.keywer.article.demospringelasticsearch.service;
 
 import com.keywer.article.demospringelasticsearch.dao.MessageRepository;
 import com.keywer.article.demospringelasticsearch.model.Message;
+import com.keywer.article.demospringelasticsearch.model.SearchResult;
+import org.elasticsearch.common.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.keywer.article.demospringelasticsearch.utils.Utils.pageableOf;
@@ -22,18 +26,20 @@ public class MessageService {
         return tweets;
     }
 
-    public List<Message> findByUsername(String username, int pageNum, int pageSize) {
-        return messageRepository.findByUsernameOrderByCreationDate(username, pageableOf(pageNum, pageSize))
-                .getContent();
+    public List<Message> findByUsername(String username, Integer pageNum, Integer pageSize) {
+        Page<Message> pageResult = messageRepository.findByUsernameOrderByCreationDate(username, pageableOf(pageNum, pageSize));
+        return pageResult != null ? pageResult.getContent() : Collections.emptyList();
     }
 
     public List<Message> findByUsernameUsingCustomQuery(String username, Integer pageNum, Integer pageSize) {
-        return messageRepository.findByUsernameUsingCustomQuery(username, pageableOf(pageNum, pageSize))
-                .getContent();
+        Page<Message> pageResult = messageRepository.findByUsernameUsingCustomQuery(username, pageableOf(pageNum, pageSize));
+        return pageResult != null ? pageResult.getContent() : Collections.emptyList();
     }
 
-    public List<Message> search(String text, Integer pageNum, Integer pageSize) {
-        return messageRepository.search(text, pageableOf(pageNum, pageSize))
-                .getContent();
+    public SearchResult search(String text, String from, String until, Integer pageNum, Integer pageSize) {
+        Page<Message> pageResult = Strings.isEmpty(from) && Strings.isEmpty(until)
+                ? messageRepository.search(text, pageableOf(pageNum, pageSize))
+                : messageRepository.searchWithDateRange(text, from, until, pageableOf(pageNum, pageSize));
+        return new SearchResult(pageResult.getContent(), pageResult.getTotalElements(), pageResult.getTotalPages(), pageResult.getNumberOfElements());
     }
 }
