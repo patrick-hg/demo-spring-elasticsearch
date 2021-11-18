@@ -21,9 +21,9 @@ public class MessageService {
     private MessageRepository messageRepository;
 
     public List<Message> getAll() {
-        List<Message> tweets = new ArrayList<>();
-        messageRepository.findAll().forEach(tweets::add);
-        return tweets;
+        List<Message> messages = new ArrayList<>();
+        messageRepository.findAll().forEach(messages::add);
+        return messages;
     }
 
     public List<Message> findByUsername(String username, Integer pageNum, Integer pageSize) {
