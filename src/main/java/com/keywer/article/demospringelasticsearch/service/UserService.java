@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -22,10 +22,17 @@ public class UserService {
         return users;
     }
 
-    public User persistUser(User user) {
-        if (Strings.isEmpty(user.getId())) {
-            user.setCreationDate(new Date());
+    public Optional<User> findByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public void persistUser(User user) {
+        if (findByUsername(user.getUsername()).isEmpty()) {     // seulement s'il n'existe pas
+            userRepository.save(user);
         }
-        return userRepository.save(user);
+    }
+
+    public void persistAll(List<User> users) {
+        users.forEach(this::persistUser);
     }
 }

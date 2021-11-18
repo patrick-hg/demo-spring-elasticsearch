@@ -1,13 +1,12 @@
-username;name
-jean.dupond;Jean DUPOND
-john.doe;John DOE
-rick.martin;Rick MARTIN
-paul.smith;Paul SMITH
-aadesh.patel;Aadesh PATEL
-javacodegeeks;Java Code Geek
-reuters; Reuters
-afp;AFP
-rhdevelopers;Redhat Developers
-gadgethax;GadgetHAX
-lefigaro;Le Figaro
-xdadevelopers; XDA Developers
+username				;	name											; age ;	nationalite		;	membreDepuis
+jean.dupond	;	Jean DUPOND				; 23		;	FRANCAISE				;	2019-05-12
+john.doe				;	John DOE							; 24		;	ANGLAISE					;	2019-07-12
+rick.martin	;	Rick MARTIN				; 25		;	ANGLAISE					;	2020-04-12
+paul.martin	;	Paul MARTIN				; 27		;	FRANCAISE				;	2020-10-12
+aadesh.patel;	Aadesh PATEL			; 29		;	INDIENNE					;	2020-10-17
+marc.martin	;	Marc MARTIN				; 33		;	ANGLAISE					;	2021-01-07
+marc.henry		;	Marc HENRY					; 35		;	FRANCAISE				;	2021-03-12
+fred.henry		;	Fred HENRY					; 37		;	FRANCAISE				;	2021-05-13
+jules.julien;	Jules JULIEN			; 22		;	FRANCAISE				;	2021-07-21
+aarush.laghari;Aarush LAGHARI; 27		;	INDIENNE					;	2021-08-15
+kim.lan					;	Kim LAN								; 29		; VIETNAMIENNE	;	2020-02-23
